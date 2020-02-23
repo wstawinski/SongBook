@@ -13,6 +13,5 @@ namespace SongBook.Domain.Interfaces.Base
         T Update(T model);
         void Remove(long id);
         void SaveChanges();
-        void SaveChangesAsync();
     }
 }

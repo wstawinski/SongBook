@@ -46,7 +46,7 @@ namespace SongBook.Domain.Managers.Base
         {
             Repository.Remove(id);
 
-            Repository.SaveChangesAsync();
+            Repository.SaveChanges();
         }
     }
 }
