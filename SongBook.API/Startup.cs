@@ -1,8 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SongBook.Domain.Interfaces.Manager;
+using SongBook.Domain.Interfaces.Repository;
+using SongBook.Domain.Managers;
+using SongBook.Repo;
+using SongBook.Repo.Repositories;
 
 namespace SongBook.API
 {
@@ -19,6 +25,17 @@ namespace SongBook.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<SongBookDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DatabaseConnectionString")));
+
+            services.AddScoped<IPerformerRepository, PerformerRepository>();
+            services.AddScoped<ISongRepository, SongRepository>();
+            services.AddScoped<IChordRepository, ChordRepository>();
+
+            services.AddScoped<IPerformerManager, PerformerManager>();
+            services.AddScoped<ISongManager, SongManager>();
+            services.AddScoped<IChordManager, ChordManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -30,8 +47,6 @@ namespace SongBook.API
             }
 
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
