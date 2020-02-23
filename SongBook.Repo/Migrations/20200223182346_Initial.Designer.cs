@@ -10,7 +10,7 @@ using SongBook.Repo;
 namespace SongBook.Repo.Migrations
 {
     [DbContext(typeof(SongBookDbContext))]
-    [Migration("20200223182023_Initial")]
+    [Migration("20200223182346_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,9 +85,6 @@ namespace SongBook.Repo.Migrations
                                 .HasColumnType("bigint")
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                            b1.Property<long>("Id")
-                                .HasColumnType("bigint");
-
                             b1.Property<string>("Text")
                                 .HasColumnType("nvarchar(max)");
 
@@ -108,9 +105,6 @@ namespace SongBook.Repo.Migrations
                                 .ValueGeneratedOnAdd()
                                 .HasColumnType("bigint")
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<long>("Id")
-                                .HasColumnType("bigint");
 
                             b1.Property<string>("Text")
                                 .HasColumnType("nvarchar(max)");

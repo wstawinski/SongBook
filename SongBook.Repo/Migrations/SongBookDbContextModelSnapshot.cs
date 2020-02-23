@@ -83,9 +83,6 @@ namespace SongBook.Repo.Migrations
                                 .HasColumnType("bigint")
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                            b1.Property<long>("Id")
-                                .HasColumnType("bigint");
-
                             b1.Property<string>("Text")
                                 .HasColumnType("nvarchar(max)");
 
@@ -106,9 +103,6 @@ namespace SongBook.Repo.Migrations
                                 .ValueGeneratedOnAdd()
                                 .HasColumnType("bigint")
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<long>("Id")
-                                .HasColumnType("bigint");
 
                             b1.Property<string>("Text")
                                 .HasColumnType("nvarchar(max)");

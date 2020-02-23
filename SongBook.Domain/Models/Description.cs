@@ -2,7 +2,7 @@
 
 namespace SongBook.Domain.Models
 {
-    public class Description : ModelBase
+    public class Description
     {
         public string Title { get; set; }
         public string Text { get; set; }
