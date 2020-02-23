@@ -18,6 +18,7 @@ namespace SongBook.API.Controllers
         {
             return new Song
             {
+                Performer = new Performer(),
                 Paragraphs = new List<Paragraph>
                 {
                     new Paragraph
@@ -36,7 +37,9 @@ namespace SongBook.API.Controllers
                             }
                         }
                     }
-                }
+                },
+                PerformerDescription = new Description(),
+                UserDescription = new Description()
             };
         }
     }
