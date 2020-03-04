@@ -2,7 +2,8 @@
 {
     public enum ParagraphType : byte
     {
-        Verse = 0,
-        Chorus = 1
+        None = 0,
+        Verse = 1,
+        Chorus = 2
     }
 }
