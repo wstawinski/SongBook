@@ -75,28 +75,7 @@ namespace SongBook.Repo.Migrations
                         .WithMany("Songs")
                         .HasForeignKey("PerformerId");
 
-                    b.OwnsOne("SongBook.Domain.Models.Description", "PerformerDescription", b1 =>
-                        {
-                            b1.Property<long>("SongId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<string>("Text")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("Title")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("SongId");
-
-                            b1.ToTable("Songs");
-
-                            b1.WithOwner()
-                                .HasForeignKey("SongId");
-                        });
-
-                    b.OwnsOne("SongBook.Domain.Models.Description", "UserDescription", b1 =>
+                    b.OwnsOne("SongBook.Domain.Models.Description", "Description", b1 =>
                         {
                             b1.Property<long>("SongId")
                                 .ValueGeneratedOnAdd()

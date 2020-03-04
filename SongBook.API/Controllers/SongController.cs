@@ -38,8 +38,7 @@ namespace SongBook.API.Controllers
                         }
                     }
                 },
-                PerformerDescription = new Description(),
-                UserDescription = new Description()
+                Description = new Description()
             };
         }
     }

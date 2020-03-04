@@ -32,8 +32,7 @@ namespace SongBook.Repo.Configurations
                 });
             });
 
-            builder.OwnsOne(s => s.PerformerDescription);
-            builder.OwnsOne(s => s.UserDescription);
+            builder.OwnsOne(s => s.Description);
         }
     }
 }

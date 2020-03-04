@@ -7,7 +7,6 @@ namespace SongBook.Domain.Models
     {
         public Performer Performer { get; set; }
         public List<Paragraph> Paragraphs { get; set; }
-        public Description PerformerDescription { get; set; }
-        public Description UserDescription { get; set; }
+        public Description Description { get; set; }
     }
 }

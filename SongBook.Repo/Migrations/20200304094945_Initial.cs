@@ -40,10 +40,8 @@ namespace SongBook.Repo.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PerformerId = table.Column<long>(nullable: true),
-                    PerformerDescription_Title = table.Column<string>(nullable: true),
-                    PerformerDescription_Text = table.Column<string>(nullable: true),
-                    UserDescription_Title = table.Column<string>(nullable: true),
-                    UserDescription_Text = table.Column<string>(nullable: true)
+                    Description_Title = table.Column<string>(nullable: true),
+                    Description_Text = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

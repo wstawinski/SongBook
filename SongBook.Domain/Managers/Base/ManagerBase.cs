@@ -14,17 +14,17 @@ namespace SongBook.Domain.Managers.Base
             Repository = repository;
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
             return await Repository.GetAllAsync();
         }
 
-        public async Task<T> GetByIdAsync(long id)
+        public virtual async Task<T> GetByIdAsync(long id)
         {
             return await Repository.GetByIdAsync(id);
         }
 
-        public T Add(T model)
+        public virtual T Add(T model)
         {
             var result = Repository.Add(model);
 
@@ -33,7 +33,7 @@ namespace SongBook.Domain.Managers.Base
             return result;
         }
 
-        public T Update(T model)
+        public virtual T Update(T model)
         {
             var result = Repository.Update(model);
 
@@ -42,7 +42,7 @@ namespace SongBook.Domain.Managers.Base
             return result;
         }
 
-        public void Remove(long id)
+        public virtual void Remove(long id)
         {
             Repository.Remove(id);
 

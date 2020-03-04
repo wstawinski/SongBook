@@ -15,36 +15,36 @@ namespace SongBook.Repo.Repositories.Base
             DataContext = dataContext;
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
             return await DataContext.Set<T>().ToListAsync();
         }
 
-        public T GetById(long id)
+        public virtual T GetById(long id)
         {
             return DataContext.Set<T>().Find(id);
         }
 
-        public async Task<T> GetByIdAsync(long id)
+        public virtual async Task<T> GetByIdAsync(long id)
         {
             return await DataContext.Set<T>().FindAsync(id);
         }
 
-        public T Add(T model)
+        public virtual T Add(T model)
         {
             DataContext.Set<T>().Add(model);
 
             return model;
         }
 
-        public T Update(T model)
+        public virtual T Update(T model)
         {
             DataContext.Set<T>().Update(model);
 
             return model;
         }
 
-        public void Remove(long id)
+        public virtual void Remove(long id)
         {
             var model = GetById(id);
 
