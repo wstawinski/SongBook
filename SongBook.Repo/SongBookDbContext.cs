@@ -11,9 +11,13 @@ namespace SongBook.Repo
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfiguration(new ChordConfiguration());
+            builder.ApplyConfiguration(new DescriptionConfiguration());
+            builder.ApplyConfiguration(new LineChordConfiguration());
+            builder.ApplyConfiguration(new LineConfiguration());
+            builder.ApplyConfiguration(new ParagraphConfiguration());
             builder.ApplyConfiguration(new PerformerConfiguration());
             builder.ApplyConfiguration(new SongConfiguration());
-            builder.ApplyConfiguration(new ChordConfiguration());
         }
     }
 }

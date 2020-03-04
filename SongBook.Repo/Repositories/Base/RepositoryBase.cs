@@ -27,7 +27,22 @@ namespace SongBook.Repo.Repositories.Base
 
         public virtual async Task<T> GetByIdAsync(long id)
         {
-            return await DataContext.Set<T>().FindAsync(id);
+            return await GetByIdAsync(id, null);
+        }
+
+        public virtual async Task<T> GetByIdAsync(long id, string[] includes)
+        {
+            var query = DataContext.Set<T>().AsQueryable();
+
+            if (includes != null)
+            {
+                foreach (var include in includes)
+                {
+                    query = query.Include(include);
+                }
+            }
+
+            return await query.FirstOrDefaultAsync(m => m.Id == id);
         }
 
         public virtual T Add(T model)

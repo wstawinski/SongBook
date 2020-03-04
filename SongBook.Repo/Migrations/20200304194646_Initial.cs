@@ -40,8 +40,7 @@ namespace SongBook.Repo.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PerformerId = table.Column<long>(nullable: true),
-                    Description_Title = table.Column<string>(nullable: true),
-                    Description_Text = table.Column<string>(nullable: true)
+                    Title = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -55,6 +54,25 @@ namespace SongBook.Repo.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Descriptions",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    Text = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Descriptions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Descriptions_Songs_Id",
+                        column: x => x.Id,
+                        principalTable: "Songs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Paragraphs",
                 columns: table => new
                 {
@@ -62,7 +80,7 @@ namespace SongBook.Repo.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Number = table.Column<byte>(nullable: false),
                     Type = table.Column<byte>(nullable: false),
-                    SongId = table.Column<long>(nullable: false)
+                    SongId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -83,7 +101,7 @@ namespace SongBook.Repo.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Number = table.Column<byte>(nullable: false),
                     Text = table.Column<string>(nullable: true),
-                    ParagraphId = table.Column<long>(nullable: false)
+                    ParagraphId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -104,7 +122,7 @@ namespace SongBook.Repo.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Number = table.Column<byte>(nullable: false),
                     ChordId = table.Column<long>(nullable: true),
-                    LineId = table.Column<long>(nullable: false)
+                    LineId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -114,7 +132,7 @@ namespace SongBook.Repo.Migrations
                         column: x => x.ChordId,
                         principalTable: "Chords",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_LineChords_Lines_LineId",
                         column: x => x.LineId,
@@ -151,6 +169,9 @@ namespace SongBook.Repo.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Descriptions");
+
             migrationBuilder.DropTable(
                 name: "LineChords");
 

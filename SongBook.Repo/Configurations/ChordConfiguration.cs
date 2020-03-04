@@ -10,6 +10,10 @@ namespace SongBook.Repo.Configurations
         {
             builder.ToTable("Chords");
             builder.HasKey(c => c.Id);
+
+            builder.HasMany<LineChord>()
+                .WithOne(lc => lc.Chord)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

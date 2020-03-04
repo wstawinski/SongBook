@@ -11,28 +11,13 @@ namespace SongBook.Repo.Configurations
             builder.ToTable("Songs");
             builder.HasKey(s => s.Id);
 
-            builder.OwnsMany(s => s.Paragraphs, p =>
-            {
-                p.ToTable("Paragraphs");
-                p.HasKey(p => p.Id);
-                p.Ignore(p => p.IsDeleted);
+            builder.HasMany(s => s.Paragraphs)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Cascade);
 
-                p.OwnsMany(p => p.Lines, l =>
-                {
-                    l.ToTable("Lines");
-                    l.HasKey(l => l.Id);
-                    l.Ignore(l => l.IsDeleted);
-
-                    l.OwnsMany(l => l.LineChords, lc =>
-                    {
-                        lc.ToTable("LineChords");
-                        lc.HasKey(lc => lc.Id);
-                        lc.Ignore(lc => lc.IsDeleted);
-                    });
-                });
-            });
-
-            builder.OwnsOne(s => s.Description);
+            builder.HasOne(s => s.Description)
+                .WithOne()
+                .HasForeignKey<Description>(d => d.Id);
         }
     }
 }
