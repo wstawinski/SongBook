@@ -53,7 +53,7 @@ namespace SongBook.Repo.Migrations
                         column: x => x.PerformerId,
                         principalTable: "Performers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(

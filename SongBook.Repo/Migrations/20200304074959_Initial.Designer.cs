@@ -10,7 +10,7 @@ using SongBook.Repo;
 namespace SongBook.Repo.Migrations
 {
     [DbContext(typeof(SongBookDbContext))]
-    [Migration("20200223182346_Initial")]
+    [Migration("20200304074959_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,8 +75,7 @@ namespace SongBook.Repo.Migrations
                 {
                     b.HasOne("SongBook.Domain.Models.Performer", "Performer")
                         .WithMany("Songs")
-                        .HasForeignKey("PerformerId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("PerformerId");
 
                     b.OwnsOne("SongBook.Domain.Models.Description", "PerformerDescription", b1 =>
                         {

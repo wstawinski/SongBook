@@ -73,8 +73,7 @@ namespace SongBook.Repo.Migrations
                 {
                     b.HasOne("SongBook.Domain.Models.Performer", "Performer")
                         .WithMany("Songs")
-                        .HasForeignKey("PerformerId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("PerformerId");
 
                     b.OwnsOne("SongBook.Domain.Models.Description", "PerformerDescription", b1 =>
                         {

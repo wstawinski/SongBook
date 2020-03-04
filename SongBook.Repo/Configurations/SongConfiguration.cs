@@ -28,8 +28,6 @@ namespace SongBook.Repo.Configurations
                         lc.ToTable("LineChords");
                         lc.HasKey(lc => lc.Id);
                         lc.Ignore(lc => lc.IsDeleted);
-
-                        lc.HasOne(lc => lc.Chord);
                     });
                 });
             });

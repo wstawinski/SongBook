@@ -10,10 +10,6 @@ namespace SongBook.Repo.Configurations
         {
             builder.ToTable("Performers");
             builder.HasKey(p => p.Id);
-
-            builder.HasMany(p => p.Songs)
-                .WithOne(s => s.Performer)
-                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
