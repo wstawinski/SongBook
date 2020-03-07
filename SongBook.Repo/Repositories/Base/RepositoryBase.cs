@@ -20,14 +20,14 @@ namespace SongBook.Repo.Repositories.Base
             return await DataContext.Set<T>().ToListAsync();
         }
 
-        public virtual T GetById(long id)
+        protected virtual T GetById(long id)
         {
             return DataContext.Set<T>().Find(id);
         }
 
         public virtual async Task<T> GetByIdAsync(long id)
         {
-            return await GetByIdAsync(id, null);
+            return await DataContext.Set<T>().FindAsync(id);
         }
 
         public virtual async Task<T> GetByIdAsync(long id, string[] includes)
@@ -45,18 +45,43 @@ namespace SongBook.Repo.Repositories.Base
             return await query.FirstOrDefaultAsync(m => m.Id == id);
         }
 
-        public virtual T Add(T model)
+        public virtual void Add(T model)
         {
             DataContext.Set<T>().Add(model);
-
-            return model;
         }
 
-        public virtual T Update(T model)
+        public virtual void Update(T model)
         {
+            DataContext.Attach(model);
+
             DataContext.Set<T>().Update(model);
 
-            return model;
+            UpdateCollections();
+        }
+
+        protected virtual void UpdateCollections()
+        {
+        }
+
+        protected virtual void UpdateCollection<TItem>(IEnumerable<TItem> collection) where TItem : CollectionItemBase
+        {
+            if (collection != null)
+            {
+                foreach (var item in collection)
+                {
+                    if (item.IsDeleted)
+                    {
+                        if (item.Id > 0)
+                        {
+                            DataContext.Set<TItem>().Remove(item);
+                        }
+                    }
+                    else
+                    {
+                        DataContext.Set<TItem>().Update(item);
+                    }
+                }
+            }
         }
 
         public virtual void Remove(long id)

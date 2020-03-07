@@ -26,18 +26,22 @@ namespace SongBook.Domain.Managers.Base
 
         public virtual async Task<T> Add(T model)
         {
-            var result = Repository.Add(model);
+            Repository.Add(model);
 
             await Repository.SaveChangesAsync();
+
+            var result = await Repository.GetByIdAsync(model.Id);
 
             return result;
         }
 
         public virtual async Task<T> Update(T model)
         {
-            var result = Repository.Update(model);
+            Repository.Update(model);
 
             await Repository.SaveChangesAsync();
+
+            var result = await Repository.GetByIdAsync(model.Id);
 
             return result;
         }
