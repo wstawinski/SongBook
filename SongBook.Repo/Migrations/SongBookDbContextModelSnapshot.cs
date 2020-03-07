@@ -60,8 +60,8 @@ namespace SongBook.Repo.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<byte>("Number")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
 
                     b.Property<long?>("ParagraphId")
                         .HasColumnType("bigint");
@@ -89,8 +89,8 @@ namespace SongBook.Repo.Migrations
                     b.Property<long?>("LineId")
                         .HasColumnType("bigint");
 
-                    b.Property<byte>("Number")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -108,8 +108,8 @@ namespace SongBook.Repo.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<byte>("Number")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
 
                     b.Property<long?>("SongId")
                         .HasColumnType("bigint");
@@ -201,7 +201,8 @@ namespace SongBook.Repo.Migrations
                 {
                     b.HasOne("SongBook.Domain.Models.Performer", "Performer")
                         .WithMany("Songs")
-                        .HasForeignKey("PerformerId");
+                        .HasForeignKey("PerformerId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 #pragma warning restore 612, 618
         }

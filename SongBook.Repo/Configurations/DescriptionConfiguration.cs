@@ -9,7 +9,6 @@ namespace SongBook.Repo.Configurations
         public void Configure(EntityTypeBuilder<Description> builder)
         {
             builder.ToTable("Descriptions");
-            builder.HasKey(d => d.Id);
         }
     }
 }

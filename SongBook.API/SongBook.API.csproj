@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SongBook.Domain\SongBook.Domain.csproj" />
     <ProjectReference Include="..\SongBook.Repo\SongBook.Repo.csproj" />
   </ItemGroup>
 

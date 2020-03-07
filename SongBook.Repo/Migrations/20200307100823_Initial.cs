@@ -50,7 +50,7 @@ namespace SongBook.Repo.Migrations
                         column: x => x.PerformerId,
                         principalTable: "Performers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -78,7 +78,7 @@ namespace SongBook.Repo.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Number = table.Column<byte>(nullable: false),
+                    Number = table.Column<int>(nullable: false),
                     Type = table.Column<byte>(nullable: false),
                     SongId = table.Column<long>(nullable: true)
                 },
@@ -99,7 +99,7 @@ namespace SongBook.Repo.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Number = table.Column<byte>(nullable: false),
+                    Number = table.Column<int>(nullable: false),
                     Text = table.Column<string>(nullable: true),
                     ParagraphId = table.Column<long>(nullable: true)
                 },
@@ -120,7 +120,7 @@ namespace SongBook.Repo.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Number = table.Column<byte>(nullable: false),
+                    Number = table.Column<int>(nullable: false),
                     ChordId = table.Column<long>(nullable: true),
                     LineId = table.Column<long>(nullable: true)
                 },

@@ -9,7 +9,6 @@ namespace SongBook.Repo.Configurations
         public void Configure(EntityTypeBuilder<Paragraph> builder)
         {
             builder.ToTable("Paragraphs");
-            builder.HasKey(c => c.Id);
             builder.Ignore(c => c.IsDeleted);
 
             builder.HasMany(c => c.Lines)

@@ -9,7 +9,10 @@ namespace SongBook.Repo.Configurations
         public void Configure(EntityTypeBuilder<Performer> builder)
         {
             builder.ToTable("Performers");
-            builder.HasKey(p => p.Id);
+
+            builder.HasMany(p => p.Songs)
+                .WithOne(s => s.Performer)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

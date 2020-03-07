@@ -4,10 +4,8 @@ using System.Collections.Generic;
 
 namespace SongBook.Domain.Models
 {
-    public class Paragraph : ModelBase
+    public class Paragraph : CollectionItemBase
     {
-        public bool IsDeleted { get; set; }
-        public byte Number { get; set; }
         public ParagraphType Type { get; set; }
         public List<Line> Lines { get; set; }
     }

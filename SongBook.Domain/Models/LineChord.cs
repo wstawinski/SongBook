@@ -2,10 +2,8 @@
 
 namespace SongBook.Domain.Models
 {
-    public class LineChord : ModelBase
+    public class LineChord : CollectionItemBase
     {
-        public bool IsDeleted { get; set; }
-        public byte Number { get; set; }
         public Chord Chord { get; set; }
     }
 }

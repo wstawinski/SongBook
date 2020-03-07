@@ -9,7 +9,6 @@ namespace SongBook.Repo.Configurations
         public void Configure(EntityTypeBuilder<Chord> builder)
         {
             builder.ToTable("Chords");
-            builder.HasKey(c => c.Id);
 
             builder.HasMany<LineChord>()
                 .WithOne(lc => lc.Chord)
