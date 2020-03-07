@@ -2,6 +2,7 @@
 using SongBook.Domain.Interfaces.Base;
 using SongBook.Domain.Models.Base;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SongBook.API.Controllers.Base
@@ -17,33 +18,35 @@ namespace SongBook.API.Controllers.Base
         }
 
         [HttpGet]
-        public virtual async Task<IEnumerable<T>> Get()
+        public virtual async Task<ActionResult<IEnumerable<T>>> Get()
         {
-            return await Manager.GetAllAsync();
+            var results = await Manager.GetAllAsync();
+
+            return results.ToList();
         }
 
         [HttpGet("{id}")]
-        public virtual async Task<T> Get(long id)
+        public virtual async Task<ActionResult<T>> Get(long id)
         {
             return await Manager.GetByIdAsync(id);
         }
 
         [HttpPost]
-        public virtual T Add([FromBody]T model)
+        public virtual async Task<ActionResult<T>> Add([FromBody]T model)
         {
-            return Manager.Add(model);
+            return await Manager.Add(model);
         }
 
         [HttpPut]
-        public virtual T Update([FromBody]T model)
+        public virtual async Task<ActionResult<T>> Update([FromBody]T model)
         {
-            return Manager.Update(model);
+            return await Manager.Update(model);
         }
 
         [HttpDelete("{id}")]
-        public virtual void Remove(long id)
+        public virtual async Task Remove(long id)
         {
-            Manager.Remove(id);
+            await Manager.Remove(id);
         }
     }
 }

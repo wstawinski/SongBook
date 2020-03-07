@@ -24,29 +24,29 @@ namespace SongBook.Domain.Managers.Base
             return await Repository.GetByIdAsync(id);
         }
 
-        public virtual T Add(T model)
+        public virtual async Task<T> Add(T model)
         {
             var result = Repository.Add(model);
 
-            Repository.SaveChanges();
+            await Repository.SaveChangesAsync();
 
             return result;
         }
 
-        public virtual T Update(T model)
+        public virtual async Task<T> Update(T model)
         {
             var result = Repository.Update(model);
 
-            Repository.SaveChanges();
+            await Repository.SaveChangesAsync();
 
             return result;
         }
 
-        public virtual void Remove(long id)
+        public virtual async Task Remove(long id)
         {
             Repository.Remove(id);
 
-            Repository.SaveChanges();
+            await Repository.SaveChangesAsync();
         }
     }
 }

@@ -69,9 +69,9 @@ namespace SongBook.Repo.Repositories.Base
             }
         }
 
-        public void SaveChanges()
+        public async Task<int> SaveChangesAsync()
         {
-            DataContext.SaveChanges();
+            return await DataContext.SaveChangesAsync();
         }
     }
 }

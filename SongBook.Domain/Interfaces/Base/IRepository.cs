@@ -13,6 +13,6 @@ namespace SongBook.Domain.Interfaces.Base
         T Add(T model);
         T Update(T model);
         void Remove(long id);
-        void SaveChanges();
+        Task<int> SaveChangesAsync();
     }
 }

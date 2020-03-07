@@ -8,8 +8,8 @@ namespace SongBook.Domain.Interfaces.Base
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(long id);
-        T Add(T model);
-        T Update(T model);
-        void Remove(long id);
+        Task<T> Add(T model);
+        Task<T> Update(T model);
+        Task Remove(long id);
     }
 }
