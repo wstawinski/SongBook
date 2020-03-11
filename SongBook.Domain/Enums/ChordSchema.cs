@@ -8,7 +8,7 @@ namespace SongBook.Domain.Enums
         None = 0,
 
         /*----- Fret 1 -----*/
-        F1Eh1 = 1 << 0,
+        F1Eh = 1 << 0,
         F1B = 1 << 1,
         F1G = 1 << 2,
         F1D = 1 << 3,
