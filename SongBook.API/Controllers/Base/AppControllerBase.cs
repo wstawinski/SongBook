@@ -22,31 +22,39 @@ namespace SongBook.API.Controllers.Base
         {
             var results = await Manager.GetAllAsync();
 
-            return results.ToList();
+            return Ok(results.ToList());
         }
 
         [HttpGet("{id}")]
         public virtual async Task<ActionResult<T>> Get(long id)
         {
-            return await Manager.GetByIdAsync(id);
+            var result = await Manager.GetByIdAsync(id);
+
+            return Ok(result);
         }
 
         [HttpPost]
         public virtual async Task<ActionResult<T>> Add([FromBody]T model)
         {
-            return await Manager.Add(model);
+            var result = await Manager.Add(model);
+
+            return Ok(result);
         }
 
         [HttpPut]
         public virtual async Task<ActionResult<T>> Update([FromBody]T model)
         {
-            return await Manager.Update(model);
+            var result = await Manager.Update(model);
+
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]
-        public virtual async Task Remove(long id)
+        public virtual async Task<IActionResult> Remove(long id)
         {
             await Manager.Remove(id);
+
+            return Ok();
         }
     }
 }
