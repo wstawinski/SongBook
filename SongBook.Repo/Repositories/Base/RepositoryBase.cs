@@ -47,14 +47,14 @@ namespace SongBook.Repo.Repositories.Base
 
         public virtual void Add(T model)
         {
-            DataContext.Set<T>().Add(model);
+            DataContext.Add(model);
         }
 
         public virtual void Update(T model)
         {
             DataContext.Attach(model);
 
-            DataContext.Set<T>().Update(model);
+            DataContext.Update(model);
 
             UpdateCollections();
         }
@@ -73,12 +73,12 @@ namespace SongBook.Repo.Repositories.Base
                     {
                         if (item.Id > 0)
                         {
-                            DataContext.Set<TItem>().Remove(item);
+                            DataContext.Remove(item);
                         }
                     }
                     else
                     {
-                        DataContext.Set<TItem>().Update(item);
+                        DataContext.Update(item);
                     }
                 }
             }
@@ -90,7 +90,7 @@ namespace SongBook.Repo.Repositories.Base
 
             if (model != null)
             {
-                DataContext.Set<T>().Remove(model);
+                DataContext.Remove(model);
             }
         }
 

@@ -30,9 +30,7 @@ namespace SongBook.Domain.Managers.Base
 
             await Repository.SaveChangesAsync();
 
-            var result = await Repository.GetByIdAsync(model.Id);
-
-            return result;
+            return model;
         }
 
         public virtual async Task<T> Update(T model)
@@ -41,9 +39,7 @@ namespace SongBook.Domain.Managers.Base
 
             await Repository.SaveChangesAsync();
 
-            var result = await Repository.GetByIdAsync(model.Id);
-
-            return result;
+            return model;
         }
 
         public virtual async Task Remove(long id)
