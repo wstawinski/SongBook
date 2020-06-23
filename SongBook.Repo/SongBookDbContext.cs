@@ -36,6 +36,8 @@ namespace SongBook.Repo
             modelBuilder.Entity<Word>()
                 .HasOne(w => w.Chord)
                 .WithMany();
+            modelBuilder.Entity<Word>()
+                .ToTable(nameof(Line.Words));
         }
     }
 }
