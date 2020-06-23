@@ -1,23 +1,41 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SongBook.Repo.Configurations;
+using SongBook.Domain.Models;
 
 namespace SongBook.Repo
 {
     public class SongBookDbContext : DbContext
     {
+        public DbSet<Song> Songs { get; set; }
+        public DbSet<Chord> Chords { get; set; }
+
         public SongBookDbContext(DbContextOptions<SongBookDbContext> options) : base(options)
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            builder.ApplyConfiguration(new ChordConfiguration());
-            builder.ApplyConfiguration(new DescriptionConfiguration());
-            builder.ApplyConfiguration(new LineChordConfiguration());
-            builder.ApplyConfiguration(new LineConfiguration());
-            builder.ApplyConfiguration(new ParagraphConfiguration());
-            builder.ApplyConfiguration(new PerformerConfiguration());
-            builder.ApplyConfiguration(new SongConfiguration());
+            modelBuilder.Entity<Song>()
+                .HasMany(s => s.Paragraphs)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Paragraph>()
+                .HasMany(p => p.Lines)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Paragraph>()
+                .ToTable(nameof(Song.Paragraphs));
+
+            modelBuilder.Entity<Line>()
+                .HasMany(l => l.Words)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Line>()
+                .ToTable(nameof(Paragraph.Lines));
+
+            modelBuilder.Entity<Word>()
+                .HasOne(w => w.Chord)
+                .WithMany();
         }
     }
 }

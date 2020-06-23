@@ -1,18 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SongBook.Domain.Interfaces.Base;
-using SongBook.Domain.Models.Base;
+using SongBook.Domain.Interfaces;
+using SongBook.Domain.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SongBook.API.Controllers.Base
+namespace SongBook.API.Controllers
 {
     [ApiController]
-    public abstract class AppControllerBase<T> : ControllerBase where T : ModelBase
+    public abstract class BaseController<T,M> : ControllerBase where T : ModelBase where M : IBaseManager<T>
     {
-        protected readonly IManager<T> Manager;
+        protected readonly M Manager;
 
-        public AppControllerBase(IManager<T> manager)
+        public BaseController(M manager)
         {
             Manager = manager;
         }
@@ -44,9 +44,9 @@ namespace SongBook.API.Controllers.Base
         }
 
         [HttpDelete("{id}")]
-        public virtual async Task Remove(long id)
+        public virtual async Task<ActionResult<T>> Remove(long id)
         {
-            await Manager.Remove(id);
+            return await Manager.Remove(id);
         }
     }
 }

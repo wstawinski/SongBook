@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SongBook.API.Controllers.Base;
 using SongBook.Domain.Interfaces.Manager;
 using SongBook.Domain.Models;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using System.Collections.Generic;
 namespace SongBook.API.Controllers
 {
     [Route("api/v1/Song")]
-    public class SongController : AppControllerBase<Song>
+    public class SongController : BaseController<Song, ISongManager>
     {
         public SongController(ISongManager manager) : base(manager)
         {
@@ -18,7 +17,6 @@ namespace SongBook.API.Controllers
         {
             return new Song
             {
-                Performer = new Performer(),
                 Paragraphs = new List<Paragraph>
                 {
                     new Paragraph
@@ -27,9 +25,9 @@ namespace SongBook.API.Controllers
                         {
                             new Line
                             {
-                                LineChords = new List<LineChord>
+                                Words = new List<Word>
                                 {
-                                    new LineChord
+                                    new Word
                                     {
                                         Chord = new Chord()
                                     }
@@ -37,8 +35,7 @@ namespace SongBook.API.Controllers
                             }
                         }
                     }
-                },
-                Description = new Description()
+                }
             };
         }
     }

@@ -1,15 +1,15 @@
-﻿using SongBook.Domain.Models.Base;
+﻿using SongBook.Domain.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SongBook.Domain.Interfaces.Base
+namespace SongBook.Domain.Interfaces
 {
-    public interface IManager<T> where T : ModelBase
+    public interface IBaseManager<T> where T : ModelBase
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(long id);
         Task<T> Add(T model);
         Task<T> Update(T model);
-        Task Remove(long id);
+        Task<T> Remove(long id);
     }
 }

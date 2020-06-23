@@ -4,7 +4,7 @@ using SongBook.Repo.Repositories.Base;
 
 namespace SongBook.Repo.Repositories
 {
-    public class ChordRepository : RepositoryBase<Chord>, IChordRepository
+    public class ChordRepository : BaseRepository<Chord>, IChordRepository
     {
         public ChordRepository(SongBookDbContext dataContext) : base(dataContext)
         {

@@ -1,15 +1,15 @@
-﻿using SongBook.Domain.Interfaces.Base;
-using SongBook.Domain.Models.Base;
+﻿using SongBook.Domain.Interfaces;
+using SongBook.Domain.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SongBook.Domain.Managers.Base
+namespace SongBook.Domain.Managers
 {
-    public abstract class ManagerBase<T> : IManager<T> where T : ModelBase
+    public abstract class BaseManager<T,R> : IBaseManager<T> where T : ModelBase where R : IBaseRepository<T>
     {
-        protected readonly IRepository<T> Repository;
+        protected readonly R Repository;
 
-        public ManagerBase(IRepository<T> repository)
+        public BaseManager(R repository)
         {
             Repository = repository;
         }
@@ -42,11 +42,18 @@ namespace SongBook.Domain.Managers.Base
             return model;
         }
 
-        public virtual async Task Remove(long id)
+        public virtual async Task<T> Remove(long id)
         {
-            Repository.Remove(id);
+            var model = await Repository.GetByIdAsync(id);
 
-            await Repository.SaveChangesAsync();
+            if (model != null)
+            {
+                Repository.Remove(model.Id);
+
+                await Repository.SaveChangesAsync();
+            }
+
+            return model;
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using SongBook.Domain.Enums;
-using SongBook.Domain.Models.Base;
 
 namespace SongBook.Domain.Models
 {

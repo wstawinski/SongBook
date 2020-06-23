@@ -25,22 +25,16 @@ namespace SongBook.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers()
-                .AddNewtonsoftJson(options =>
-                {
-                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-                    options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
-                });
+                .AddNewtonsoftJson(options => 
+                    options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter()));
 
             services.AddDbContext<SongBookDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DatabaseConnectionString")));
 
-            services.AddScoped<IPerformerRepository, PerformerRepository>();
-            services.AddScoped<ISongRepository, SongRepository>();
             services.AddScoped<IChordRepository, ChordRepository>();
-
-            services.AddScoped<IPerformerManager, PerformerManager>();
-            services.AddScoped<ISongManager, SongManager>();
             services.AddScoped<IChordManager, ChordManager>();
+            services.AddScoped<ISongRepository, SongRepository>();
+            services.AddScoped<ISongManager, SongManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

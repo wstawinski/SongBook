@@ -1,10 +1,10 @@
-﻿using SongBook.Domain.Models.Base;
+﻿using SongBook.Domain.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SongBook.Domain.Interfaces.Base
+namespace SongBook.Domain.Interfaces
 {
-    public interface IRepository<T> where T : ModelBase
+    public interface IBaseRepository<T> where T : ModelBase
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(long id);

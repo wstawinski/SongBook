@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SongBook.API.Controllers.Base;
 using SongBook.Domain.Interfaces.Manager;
 using SongBook.Domain.Models;
 
 namespace SongBook.API.Controllers
 {
     [Route("api/v1/Chord")]
-    public class ChordController : AppControllerBase<Chord>
+    public class ChordController : BaseController<Chord, IChordManager>
     {
         public ChordController(IChordManager manager) : base(manager)
         {

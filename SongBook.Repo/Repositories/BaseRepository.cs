@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using SongBook.Domain.Interfaces.Base;
-using SongBook.Domain.Models.Base;
+using SongBook.Domain.Interfaces;
+using SongBook.Domain.Models;
 
 namespace SongBook.Repo.Repositories.Base
 {
-    public abstract class RepositoryBase<T> : IRepository<T> where T : ModelBase
+    public abstract class BaseRepository<T> : IBaseRepository<T> where T : ModelBase
     {
         protected readonly DbContext DataContext;
 
-        public RepositoryBase(DbContext dataContext)
+        public BaseRepository(DbContext dataContext)
         {
             DataContext = dataContext;
         }
@@ -18,11 +18,6 @@ namespace SongBook.Repo.Repositories.Base
         public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
             return await DataContext.Set<T>().ToListAsync();
-        }
-
-        protected virtual T GetById(long id)
-        {
-            return DataContext.Set<T>().Find(id);
         }
 
         public virtual async Task<T> GetByIdAsync(long id)
@@ -47,16 +42,22 @@ namespace SongBook.Repo.Repositories.Base
 
         public virtual void Add(T model)
         {
-            DataContext.Add(model);
+            if (model != null)
+            {
+                DataContext.Add(model);
+            }
         }
 
         public virtual void Update(T model)
         {
-            DataContext.Attach(model);
+            if (model != null)
+            {
+                DataContext.Attach(model);
 
-            DataContext.Update(model);
+                DataContext.Update(model);
 
-            UpdateCollections();
+                UpdateCollections();
+            }
         }
 
         protected virtual void UpdateCollections()
@@ -86,12 +87,7 @@ namespace SongBook.Repo.Repositories.Base
 
         public virtual void Remove(long id)
         {
-            var model = GetById(id);
-
-            if (model != null)
-            {
-                DataContext.Remove(model);
-            }
+            DataContext.Remove(id);
         }
 
         public async Task<int> SaveChangesAsync()
