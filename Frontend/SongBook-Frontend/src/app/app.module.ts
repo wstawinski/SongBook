@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+import 'automapper-ts';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
-import { SliderModule } from 'primeng/slider';
 
 @NgModule({
   declarations: [
@@ -13,8 +14,7 @@ import { SliderModule } from 'primeng/slider';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    SliderModule
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
