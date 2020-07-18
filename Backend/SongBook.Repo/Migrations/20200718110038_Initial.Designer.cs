@@ -10,7 +10,7 @@ using SongBook.Repo;
 namespace SongBook.Repo.Migrations
 {
     [DbContext(typeof(SongBookDbContext))]
-    [Migration("20200623202620_Initial")]
+    [Migration("20200718110038_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -101,6 +101,27 @@ namespace SongBook.Repo.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Songs");
+                });
+
+            modelBuilder.Entity("SongBook.Domain.Models.SongFile", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<byte[]>("FileData")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ROWGUID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SongFiles");
                 });
 
             modelBuilder.Entity("SongBook.Domain.Models.Word", b =>

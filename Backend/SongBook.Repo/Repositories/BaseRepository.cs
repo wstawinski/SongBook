@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using SongBook.Domain.Interfaces;
 using SongBook.Domain.Models;
 
-namespace SongBook.Repo.Repositories.Base
+namespace SongBook.Repo.Repositories
 {
-    public abstract class BaseRepository<T> : IBaseRepository<T> where T : ModelBase
+    public abstract class BaseRepository<T> : IBaseRepository<T> where T : BaseModel
     {
         protected readonly DbContext DataContext;
 
@@ -64,7 +64,7 @@ namespace SongBook.Repo.Repositories.Base
         {
         }
 
-        protected virtual void UpdateCollection<TItem>(IEnumerable<TItem> collection) where TItem : CollectionItemBase
+        protected virtual void UpdateCollection<TItem>(IEnumerable<TItem> collection) where TItem : BaseCollectionItem
         {
             if (collection != null)
             {

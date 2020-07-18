@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SongBook.Domain.Managers
 {
-    public abstract class BaseManager<T,R> : IBaseManager<T> where T : ModelBase where R : IBaseRepository<T>
+    public abstract class BaseManager<T,R> : IBaseManager<T> where T : BaseModel where R : IBaseRepository<T>
     {
         protected readonly R Repository;
 

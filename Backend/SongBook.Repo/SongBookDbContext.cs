@@ -7,6 +7,7 @@ namespace SongBook.Repo
     {
         public DbSet<Song> Songs { get; set; }
         public DbSet<Chord> Chords { get; set; }
+        public DbSet<SongFile> SongFiles { get; set; }
 
         public SongBookDbContext(DbContextOptions<SongBookDbContext> options) : base(options)
         {

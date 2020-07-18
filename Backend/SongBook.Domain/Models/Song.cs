@@ -2,7 +2,7 @@
 
 namespace SongBook.Domain.Models
 {
-    public class Song : ModelBase
+    public class Song : BaseModel
     {
         public string Performer { get; set; }
         public string Title { get; set; }

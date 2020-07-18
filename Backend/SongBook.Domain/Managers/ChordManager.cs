@@ -1,5 +1,4 @@
-﻿using SongBook.Domain.Interfaces.Manager;
-using SongBook.Domain.Interfaces.Repository;
+﻿using SongBook.Domain.Interfaces;
 using SongBook.Domain.Models;
 
 namespace SongBook.Domain.Managers

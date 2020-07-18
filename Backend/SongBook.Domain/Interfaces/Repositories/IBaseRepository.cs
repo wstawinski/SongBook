@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace SongBook.Domain.Interfaces
 {
-    public interface IBaseRepository<T> where T : ModelBase
+    public interface IBaseRepository<T> where T : BaseModel
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(long id);

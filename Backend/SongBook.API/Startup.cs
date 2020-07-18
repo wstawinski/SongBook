@@ -4,8 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SongBook.Domain.Interfaces.Manager;
-using SongBook.Domain.Interfaces.Repository;
+using SongBook.Domain.Interfaces;
 using SongBook.Domain.Managers;
 using SongBook.Repo;
 using SongBook.Repo.Repositories;
@@ -34,6 +33,8 @@ namespace SongBook.API
             services.AddScoped<IChordManager, ChordManager>();
             services.AddScoped<ISongRepository, SongRepository>();
             services.AddScoped<ISongManager, SongManager>();
+            services.AddScoped<ISongFileRepository, SongFileRepository>();
+            services.AddScoped<ISongFileManager, SongFileManager>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

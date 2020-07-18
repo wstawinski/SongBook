@@ -1,6 +1,6 @@
 ﻿using SongBook.Domain.Models;
 
-namespace SongBook.Domain.Interfaces.Manager
+namespace SongBook.Domain.Interfaces
 {
     public interface ISongManager : IBaseManager<Song>
     {

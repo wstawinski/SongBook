@@ -1,6 +1,6 @@
 ﻿namespace SongBook.Domain.Models
 {
-    public abstract class CollectionItemBase : ModelBase
+    public abstract class BaseCollectionItem : BaseModel
     {
         public bool IsDeleted { get; set; }
         public int Number { get; set; }

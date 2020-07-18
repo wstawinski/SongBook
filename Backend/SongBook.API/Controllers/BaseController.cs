@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace SongBook.API.Controllers
 {
     [ApiController]
-    public abstract class BaseController<T,M> : ControllerBase where T : ModelBase where M : IBaseManager<T>
+    public abstract class BaseController<T,M> : ControllerBase where T : BaseModel where M : IBaseManager<T>
     {
         protected readonly M Manager;
 

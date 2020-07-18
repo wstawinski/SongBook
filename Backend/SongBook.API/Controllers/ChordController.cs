@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SongBook.Domain.Interfaces.Manager;
+using SongBook.Domain.Interfaces;
 using SongBook.Domain.Models;
 
 namespace SongBook.API.Controllers

@@ -2,7 +2,7 @@
 
 namespace SongBook.Domain.Interfaces
 {
-    public interface IChordManager : IBaseManager<Chord>
+    public interface ISongFileManager : IBaseManager<SongFile>
     {
     }
 }

@@ -1,6 +1,5 @@
-﻿using SongBook.Domain.Interfaces.Repository;
+﻿using SongBook.Domain.Interfaces;
 using SongBook.Domain.Models;
-using SongBook.Repo.Repositories.Base;
 
 namespace SongBook.Repo.Repositories
 {

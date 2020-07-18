@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SongBook.Repo.Migrations
 {
@@ -18,6 +19,21 @@ namespace SongBook.Repo.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Chords", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SongFiles",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ROWGUID = table.Column<Guid>(nullable: false),
+                    FileName = table.Column<string>(nullable: true),
+                    FileData = table.Column<byte[]>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SongFiles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -128,6 +144,9 @@ namespace SongBook.Repo.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "SongFiles");
+
             migrationBuilder.DropTable(
                 name: "Words");
 
