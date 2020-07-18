@@ -27,7 +27,6 @@ namespace SongBook.Repo.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ROWGUID = table.Column<Guid>(nullable: false),
                     FileName = table.Column<string>(nullable: true),
                     FileData = table.Column<byte[]>(nullable: true)
                 },

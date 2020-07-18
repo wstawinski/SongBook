@@ -42,7 +42,6 @@ namespace SongBook.API.Controllers
 
             var songFile = new SongFile
             {
-                ROWGUID = Guid.NewGuid(),
                 FileName = file.FileName,
                 FileData = memoryStream.ToArray()
             };

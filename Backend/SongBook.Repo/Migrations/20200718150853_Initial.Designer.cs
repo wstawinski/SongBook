@@ -10,8 +10,8 @@ using SongBook.Repo;
 namespace SongBook.Repo.Migrations
 {
     [DbContext(typeof(SongBookDbContext))]
-    [Migration("20200718110044_Filestream")]
-    partial class Filestream
+    [Migration("20200718150853_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -115,9 +115,6 @@ namespace SongBook.Repo.Migrations
 
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("ROWGUID")
-                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 

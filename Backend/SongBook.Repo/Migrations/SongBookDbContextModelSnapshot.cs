@@ -114,9 +114,6 @@ namespace SongBook.Repo.Migrations
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ROWGUID")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.ToTable("SongFiles");
