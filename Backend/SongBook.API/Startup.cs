@@ -35,6 +35,10 @@ namespace SongBook.API
             services.AddScoped<ISongManager, SongManager>();
             services.AddScoped<ISongFileRepository, SongFileRepository>();
             services.AddScoped<ISongFileManager, SongFileManager>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserManager, UserManager>();
+            services.AddScoped<IIdeaRepository, IdeaRepository>();
+            services.AddScoped<IIdeaManager, IdeaManager>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

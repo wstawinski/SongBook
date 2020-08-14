@@ -25,69 +25,19 @@ namespace SongBook.Repo.Repositories
             return await DataContext.Set<T>().FindAsync(id);
         }
 
-        public virtual async Task<T> GetByIdAsync(long id, string[] includes)
-        {
-            var query = DataContext.Set<T>().AsQueryable();
-
-            if (includes != null)
-            {
-                foreach (var include in includes)
-                {
-                    query = query.Include(include);
-                }
-            }
-
-            return await query.FirstOrDefaultAsync(m => m.Id == id);
-        }
-
         public virtual void Add(T model)
         {
-            if (model != null)
-            {
-                DataContext.Add(model);
-            }
+            DataContext.Add(model);
         }
 
         public virtual void Update(T model)
         {
-            if (model != null)
-            {
-                DataContext.Attach(model);
-
-                DataContext.Update(model);
-
-                UpdateCollections();
-            }
+            DataContext.Update(model);
         }
 
-        protected virtual void UpdateCollections()
+        public virtual void Remove(T model)
         {
-        }
-
-        protected virtual void UpdateCollection<TItem>(IEnumerable<TItem> collection) where TItem : BaseCollectionItem
-        {
-            if (collection != null)
-            {
-                foreach (var item in collection)
-                {
-                    if (item.IsDeleted)
-                    {
-                        if (item.Id > 0)
-                        {
-                            DataContext.Remove(item);
-                        }
-                    }
-                    else
-                    {
-                        DataContext.Update(item);
-                    }
-                }
-            }
-        }
-
-        public virtual void Remove(long id)
-        {
-            DataContext.Remove(id);
+            DataContext.Remove(model);
         }
 
         public async Task<int> SaveChangesAsync()

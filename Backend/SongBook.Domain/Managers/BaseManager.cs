@@ -45,10 +45,9 @@ namespace SongBook.Domain.Managers
         public virtual async Task<T> Remove(long id)
         {
             var model = await Repository.GetByIdAsync(id);
-
             if (model != null)
             {
-                Repository.Remove(model.Id);
+                Repository.Remove(model);
 
                 await Repository.SaveChangesAsync();
             }

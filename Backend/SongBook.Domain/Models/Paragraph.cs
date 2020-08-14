@@ -2,7 +2,7 @@
 
 namespace SongBook.Domain.Models
 {
-    public class Paragraph : BaseCollectionItem
+    public class Paragraph : BaseModel
     {
         public List<Line> Lines { get; set; }
     }
