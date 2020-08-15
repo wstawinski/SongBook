@@ -1,0 +1,27 @@
+﻿@"ALTER DATABASE CURRENT
+ADD FILEGROUP SongBookFileGroup CONTAINS FILESTREAM
+GO
+ALTER DATABASE CURRENT
+ADD FILE
+(
+    NAME = 'SongBookFile',
+    FILENAME = 'c:\Database\SongBook'
+)
+TO FILEGROUP SongBookFileGroup
+GO
+
+ALTER TABLE dbo.SongFiles
+ADD RowGuid uniqueidentifier ROWGUIDCOL NOT NULL UNIQUE DEFAULT (newid())
+GO
+
+sp_rename 'dbo.SongFiles.FileData', 'xxFileData' , 'COLUMN'
+GO
+ALTER TABLE dbo.SongFiles
+ADD FileData varbinary(max) FILESTREAM NULL
+GO
+UPDATE dbo.SongFiles
+SET FileData = xxFileData
+GO
+ALTER TABLE dbo.SongFiles
+DROP COLUMN xxFileData
+GO",

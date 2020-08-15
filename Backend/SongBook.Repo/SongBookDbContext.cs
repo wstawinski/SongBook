@@ -68,100 +68,16 @@ namespace SongBook.Repo
                 .WithMany()
                 .HasForeignKey(q => q.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
-
-            modelBuilder.Entity<User>()
-                .HasData(new List<User>
-                {
-                    new User
-                    {
-                        Id = 1,
-                        FirstName = "FirstName1",
-                        LastName = "LastName1"
-                    },
-                    new User
-                    {
-                        Id = 2,
-                        FirstName = "FirstName2",
-                        LastName = "LastName2"
-                    }
-                });
-
-            modelBuilder.Entity<IdeaTeamMember>()
-                .HasData(new List<IdeaTeamMember>
-                {
-                    new IdeaTeamMember
-                    {
-                        Id = 1,
-                        UserId = 1,
-                        Rate = 10
-                    },
-                    new IdeaTeamMember
-                    {
-                        Id = 2,
-                        UserId = 2,
-                        Rate = 10
-                    },
-                    new IdeaTeamMember
-                    {
-                        Id = 3,
-                        UserId = 1,
-                        Rate = 10
-                    },
-                    new IdeaTeamMember
-                    {
-                        Id = 4,
-                        UserId = 2,
-                        Rate = 10
-                    }
-                });
-
             modelBuilder.Entity<Question>()
-                .HasData(new List<Question>
-                {
-                    new Question
-                    {
-                        Id = 1,
-                        UserId = 1,
-                        Content = "Content1User1"
-                    },
-                    new Question
-                    {
-                        Id = 2,
-                        UserId = 2,
-                        Content = "Content1User2"
-                    },
-                    new Question
-                    {
-                        Id = 3,
-                        UserId = 1,
-                        Content = "Content2User1"
-                    },
-                    new Question
-                    {
-                        Id = 4,
-                        UserId = 2,
-                        Content = "Content2User2"
-                    }
-                });
+                .HasMany(q => q.Answers)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Idea>()
-                .HasData(new List<Idea>
-                {
-                    new Idea
-                    {
-                        Id = 1,
-                        Name = "Name1",
-                        Description = "Description1",
-                        UserId = 1
-                    },
-                    new Idea
-                    {
-                        Id = 2,
-                        Name = "Name2",
-                        Description = "Description2",
-                        UserId = 2
-                    }
-                });
+            modelBuilder.Entity<Answer>()
+                .HasOne(a => a.User)
+                .WithMany()
+                .HasForeignKey(a => a.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

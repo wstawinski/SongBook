@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SongBook.Domain.Models
+﻿namespace SongBook.Domain.Models
 {
     public class SongFile : BaseModel
     {

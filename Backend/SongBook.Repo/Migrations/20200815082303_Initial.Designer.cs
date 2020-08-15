@@ -10,8 +10,8 @@ using SongBook.Repo;
 namespace SongBook.Repo.Migrations
 {
     [DbContext(typeof(SongBookDbContext))]
-    [Migration("20200814162404_AddedUsersAndIdeas")]
-    partial class AddedUsersAndIdeas
+    [Migration("20200815082303_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,31 @@ namespace SongBook.Repo.Migrations
                 .HasAnnotation("ProductVersion", "3.1.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("SongBook.Domain.Models.Answer", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("QuestionId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Answer");
+                });
 
             modelBuilder.Entity("SongBook.Domain.Models.Chord", b =>
                 {
@@ -60,22 +85,6 @@ namespace SongBook.Repo.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Ideas");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            Description = "Description1",
-                            Name = "Name1",
-                            UserId = 1L
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            Description = "Description2",
-                            Name = "Name2",
-                            UserId = 2L
-                        });
                 });
 
             modelBuilder.Entity("SongBook.Domain.Models.IdeaTeamMember", b =>
@@ -101,32 +110,6 @@ namespace SongBook.Repo.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("IdeaTeamMember");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            Rate = 10,
-                            UserId = 1L
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            Rate = 10,
-                            UserId = 2L
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            Rate = 10,
-                            UserId = 1L
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            Rate = 10,
-                            UserId = 2L
-                        });
                 });
 
             modelBuilder.Entity("SongBook.Domain.Models.Line", b =>
@@ -135,12 +118,6 @@ namespace SongBook.Repo.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Number")
-                        .HasColumnType("int");
 
                     b.Property<long?>("ParagraphId")
                         .HasColumnType("bigint");
@@ -158,12 +135,6 @@ namespace SongBook.Repo.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Number")
-                        .HasColumnType("int");
 
                     b.Property<long?>("SongId")
                         .HasColumnType("bigint");
@@ -198,32 +169,6 @@ namespace SongBook.Repo.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Question");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            Content = "Content1User1",
-                            UserId = 1L
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            Content = "Content1User2",
-                            UserId = 2L
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            Content = "Content2User1",
-                            UserId = 1L
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            Content = "Content2User2",
-                            UserId = 2L
-                        });
                 });
 
             modelBuilder.Entity("SongBook.Domain.Models.Song", b =>
@@ -278,20 +223,6 @@ namespace SongBook.Repo.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            FirstName = "FirstName1",
-                            LastName = "LastName1"
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            FirstName = "FirstName2",
-                            LastName = "LastName2"
-                        });
                 });
 
             modelBuilder.Entity("SongBook.Domain.Models.Word", b =>
@@ -304,14 +235,8 @@ namespace SongBook.Repo.Migrations
                     b.Property<long?>("ChordId")
                         .HasColumnType("bigint");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<long?>("LineId")
                         .HasColumnType("bigint");
-
-                    b.Property<int>("Number")
-                        .HasColumnType("int");
 
                     b.Property<string>("Text")
                         .HasColumnType("nvarchar(max)");
@@ -323,6 +248,20 @@ namespace SongBook.Repo.Migrations
                     b.HasIndex("LineId");
 
                     b.ToTable("Words");
+                });
+
+            modelBuilder.Entity("SongBook.Domain.Models.Answer", b =>
+                {
+                    b.HasOne("SongBook.Domain.Models.Question", null)
+                        .WithMany("Answers")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SongBook.Domain.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SongBook.Domain.Models.Idea", b =>

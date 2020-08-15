@@ -5,7 +5,7 @@ namespace SongBook.Repo.Repositories
 {
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
-        public UserRepository(SongBookDbContext dbContext) : base(dbContext)
+        public UserRepository(SongBookDbContext dataContext) : base(dataContext)
         {
         }
     }
