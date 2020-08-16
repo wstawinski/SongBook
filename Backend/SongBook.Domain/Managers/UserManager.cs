@@ -22,15 +22,16 @@ namespace SongBook.Domain.Managers
                 return null;
             }
 
-            using var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
+            using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            {
+                await _ideaManager.RemoveNestedObjectsByUserId(user.Id);
 
-            await _ideaManager.RemoveNestedObjectsByUserId(user.Id);
+                Repository.Remove(user);
 
-            Repository.Remove(user);
+                await Repository.SaveChangesAsync();
 
-            await Repository.SaveChangesAsync();
-
-            scope.Complete();
+                scope.Complete();
+            }            
 
             return user;
         }

@@ -10,6 +10,15 @@ namespace SongBook.Domain.Managers
         {
         }
 
+        public override async Task<Idea> Update(Idea model)
+        {
+            await Repository.Update(model);
+
+            await Repository.SaveChangesAsync();
+
+            return model;
+        }
+
         public async Task RemoveNestedObjectsByUserId(long userId)
         {
             await Repository.RemoveNestedObjectsByUserId(userId);

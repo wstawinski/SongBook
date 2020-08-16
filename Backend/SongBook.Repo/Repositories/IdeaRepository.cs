@@ -12,6 +12,69 @@ namespace SongBook.Repo.Repositories
         {
         }
 
+        public override async Task<Idea> GetByIdAsync(long id)
+        {
+            var idea = await DataContext.Set<Idea>()
+                .Include(i => i.IdeaTeamMembers)
+                    .ThenInclude(i => i.User)
+                .Include(i => i.Questions)
+                    .ThenInclude(q => q.User)
+                .Include(i => i.Questions)
+                    .ThenInclude(q => q.Answers)
+                        .ThenInclude(a => a.User)
+                .FirstOrDefaultAsync(i => i.Id == id);
+
+            return idea;
+        }
+
+        public override void Add(Idea model)
+        {
+            DataContext.Set<Idea>().Attach(model);
+
+            DataContext.Set<Idea>().Add(model);
+
+            foreach (var itm in model.IdeaTeamMembers)
+            {
+                DataContext.Set<IdeaTeamMember>().Add(itm);
+            }
+            foreach (var question in model.Questions)
+            {
+                DataContext.Set<Question>().Add(question);
+            }
+        }
+
+        new public async Task Update(Idea model)
+        {
+            DataContext.Set<Idea>().Attach(model);
+
+            DataContext.Set<Idea>().Update(model);
+
+            foreach (var itm in model.IdeaTeamMembers)
+            {
+                DataContext.Set<IdeaTeamMember>().Update(itm);
+            }
+            foreach (var question in model.Questions)
+            {
+                DataContext.Set<Question>().Update(question);
+            }
+
+            var ideaTeamMembersToDelete = await DataContext.Set<Idea>()
+                .Include(i => i.IdeaTeamMembers)
+                .Where(i => i.Id == model.Id)
+                .SelectMany(i => i.IdeaTeamMembers)
+                .Where(i => !model.IdeaTeamMembers.Select(itm => itm.Id).Contains(i.Id))
+                .ToListAsync();
+            var questionsToDelete = await DataContext.Set<Idea>()
+                .Include(i => i.Questions)
+                .Where(i => i.Id == model.Id)
+                .SelectMany(i => i.Questions)
+                .Where(q => !model.Questions.Select(question => question.Id).Contains(q.Id))
+                .ToListAsync();
+
+            DataContext.RemoveRange(ideaTeamMembersToDelete);
+            DataContext.RemoveRange(questionsToDelete);
+        }
+
         public async Task RemoveNestedObjectsByUserId(long userId)
         {
             var ideaTeamMembers = await DataContext.Set<IdeaTeamMember>()

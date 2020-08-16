@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SongBook.Domain.Interfaces;
 using SongBook.Domain.Models;
-using System;
 using System.IO;
 using System.Threading.Tasks;
 

@@ -12,9 +12,6 @@ namespace SongBook.API.Controllers
         }
 
         [HttpGet("GetEmpty")]
-        public Chord GetEmpty()
-        {
-            return new Chord();
-        }
+        public Chord GetEmpty() => new Chord();
     }
 }
