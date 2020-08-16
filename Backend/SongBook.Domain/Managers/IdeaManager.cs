@@ -18,12 +18,5 @@ namespace SongBook.Domain.Managers
 
             return model;
         }
-
-        public async Task RemoveNestedObjectsByUserId(long userId)
-        {
-            await Repository.RemoveNestedObjectsByUserId(userId);
-
-            await Repository.SaveChangesAsync();
-        }
     }
 }

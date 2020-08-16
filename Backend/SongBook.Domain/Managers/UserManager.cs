@@ -1,17 +1,16 @@
 ﻿using SongBook.Domain.Interfaces;
 using SongBook.Domain.Models;
 using System.Threading.Tasks;
-using System.Transactions;
 
 namespace SongBook.Domain.Managers
 {
     public class UserManager : BaseManager<User, IUserRepository>, IUserManager
     {
-        private readonly IIdeaManager _ideaManager;
+        private readonly IIdeaRepository _ideaRepository;
 
-        public UserManager(IUserRepository repository, IIdeaManager ideaManager) : base(repository)
+        public UserManager(IUserRepository repository, IIdeaRepository ideaRepository) : base(repository)
         {
-            _ideaManager = ideaManager;
+            _ideaRepository = ideaRepository;
         }
 
         public override async Task<User> Remove(long id)
@@ -22,16 +21,11 @@ namespace SongBook.Domain.Managers
                 return null;
             }
 
-            using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-            {
-                await _ideaManager.RemoveNestedObjectsByUserId(user.Id);
+            await _ideaRepository.RemoveNestedObjectsByUserId(user.Id);
 
-                Repository.Remove(user);
+            Repository.Remove(user);
 
-                await Repository.SaveChangesAsync();
-
-                scope.Complete();
-            }            
+            await Repository.SaveChangesAsync();
 
             return user;
         }
