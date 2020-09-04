@@ -1,7 +1,7 @@
-import { CollectionItemBase } from '../collection-item-base';
+import { ModelBase } from '../model-base';
 import { ChordUiModel } from './chord-ui.model';
 
-export class WordUiModel extends CollectionItemBase {
+export class WordUiModel extends ModelBase {
   text: string;
   chord: ChordUiModel;
 

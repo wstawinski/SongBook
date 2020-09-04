@@ -1,2 +1,10 @@
-<h1>Test</h1>
-<button mat-button>Hello</button>
+<mat-toolbar color="primary">
+    <div>
+        <a mat-button routerLink="/">Śpiewnik</a>
+    </div>
+    <div>
+        <a mat-button routerLink="/chord">Akordy</a>
+        <a mat-button routerLink="/song">Piosenki</a>
+    </div>
+</mat-toolbar>
+<router-outlet></router-outlet>

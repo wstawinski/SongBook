@@ -1,45 +1,41 @@
 export class ChordLocalisationModel {
-  f1Eh: boolean;
-  f1B: boolean;
-  f1G: boolean;
-  f1D: boolean;
-  f1A: boolean;
-  f1El: boolean;
-
-  f2Eh: boolean;
-  f2B: boolean;
-  f2G: boolean;
-  f2D: boolean;
-  f2A: boolean;
-  f2El: boolean;
-
-  f3Eh: boolean;
-  f3B: boolean;
-  f3G: boolean;
-  f3D: boolean;
-  f3A: boolean;
-  f3El: boolean;
+  f1s1: boolean;
+  f1s2: boolean;
+  f1s3: boolean;
+  f1s4: boolean;
+  f1s5: boolean;
+  f1s6: boolean;
+  f2s1: boolean;
+  f2s2: boolean;
+  f2s3: boolean;
+  f2s4: boolean;
+  f2s5: boolean;
+  f2s6: boolean;
+  f3s1: boolean;
+  f3s2: boolean;
+  f3s3: boolean;
+  f3s4: boolean;
+  f3s5: boolean;
+  f3s6: boolean;
 
   constructor() {
-    this.f1Eh = false;
-    this.f1B = false;
-    this.f1G = false;
-    this.f1D = false;
-    this.f1A = false;
-    this.f1El = false;
-
-    this.f2Eh = false;
-    this.f2B = false;
-    this.f2G = false;
-    this.f2D = false;
-    this.f2A = false;
-    this.f2El = false;
-
-    this.f3Eh = false;
-    this.f3B = false;
-    this.f3G = false;
-    this.f3D = false;
-    this.f3A = false;
-    this.f3El = false;
+    this.f1s1 = false;
+    this.f1s2 = false;
+    this.f1s3 = false;
+    this.f1s4 = false;
+    this.f1s5 = false;
+    this.f1s6 = false;
+    this.f2s1 = false;
+    this.f2s2 = false;
+    this.f2s3 = false;
+    this.f2s4 = false;
+    this.f2s5 = false;
+    this.f2s6 = false;
+    this.f3s1 = false;
+    this.f3s2 = false;
+    this.f3s3 = false;
+    this.f3s4 = false;
+    this.f3s5 = false;
+    this.f3s6 = false;
   }
 }

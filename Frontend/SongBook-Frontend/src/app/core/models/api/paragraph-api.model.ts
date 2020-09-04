@@ -1,7 +1,7 @@
-import { CollectionItemBase } from '../collection-item-base';
+import { ModelBase } from '../model-base';
 import { LineApiModel } from './line-api.model';
 
-export class ParagraphApiModel extends CollectionItemBase {
+export class ParagraphApiModel extends ModelBase {
   lines: LineApiModel[];
 
   constructor() {

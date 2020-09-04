@@ -1,7 +1,7 @@
-import { CollectionItemBase } from '../collection-item-base';
+import { ModelBase } from '../model-base';
 import { WordUiModel } from './word-ui.model';
 
-export class LineUiModel extends CollectionItemBase {
+export class LineUiModel extends ModelBase {
   words: WordUiModel[];
 
   constructor() {

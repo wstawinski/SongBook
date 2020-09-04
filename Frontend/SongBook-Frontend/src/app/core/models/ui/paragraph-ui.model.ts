@@ -1,7 +1,7 @@
-import { CollectionItemBase } from '../collection-item-base';
+import { ModelBase } from '../model-base';
 import { LineUiModel } from './line-ui.model';
 
-export class ParagraphUiModel extends CollectionItemBase {
+export class ParagraphUiModel extends ModelBase {
   lines: LineUiModel[];
 
   constructor() {

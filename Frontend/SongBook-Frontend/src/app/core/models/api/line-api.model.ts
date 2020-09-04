@@ -1,7 +1,7 @@
-import { CollectionItemBase } from '../collection-item-base';
+import { ModelBase } from '../model-base';
 import { WordApiModel } from './word-api.model';
 
-export class LineApiModel extends CollectionItemBase {
+export class LineApiModel extends ModelBase {
   words: WordApiModel[];
 
   constructor() {

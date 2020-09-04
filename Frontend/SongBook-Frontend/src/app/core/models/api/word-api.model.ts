@@ -1,7 +1,7 @@
-import { CollectionItemBase } from '../collection-item-base';
+import { ModelBase } from '../model-base';
 import { ChordApiModel } from './chord-api.model';
 
-export class WordApiModel extends CollectionItemBase {
+export class WordApiModel extends ModelBase {
   text: string;
   chord: ChordApiModel;
 
